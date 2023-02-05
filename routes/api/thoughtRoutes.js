@@ -45,8 +45,8 @@ router.put('/:id', async (req, res) => {
     const updatedthought = await Thought.findOneAndUpdate(
       { _id: req.params.id },
       {
-        thoughtname: req.body.thoughtname,
-        email:req.body.email,
+        thoughtText: req.body.thoughtText,
+        // username:req.body.username,
       },
       { new: true },
       )
@@ -93,20 +93,6 @@ router.post('/:thoughtId/reactions', async (req, res) => {
  }
 });
 
-// To delete a new friend from the thought's friend list
-// router.delete('/:thoughtId/reactions', async (req, res) => {
-//   try {
-//     const thought = await Thought.findOne({_id: req.params.id})
-
-//     const deletedthought = await Thought.findOneAndDelete(
-//       { friends: req.params.friendId })
-//       res.status(200).json("thought has been removed")
-//       console.log(`Deleted: ${deletedthought}`)
-//     } catch {
-//       console.log('Uh Oh, something went wrong');
-//       res.status(500).json({ message: 'something went wrong' });
-//     }
-// });
 
 router.put('/:thoughtId/reactions/:reactionId', async (req, res) => {
   try {
