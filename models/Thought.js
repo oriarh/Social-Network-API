@@ -1,19 +1,15 @@
 const mongoose = require('mongoose');
-import reactionSchema from './Reaction';
+const reactionSchema = require('./Reaction');
 
-function updateTimeStamp () {
-    return this.createdAt = Date.now;
-}
-
-const thoughtSchema = mongoose.Schema({
+const thoughtSchema = new mongoose.Schema({
     thoughtText: {
         type: String,
         required: true,
         maxLength: 280,
     },
     createdAt: {
-        type: String,
-        get: updateTimeStamp
+        type: Date,
+        default: Date.now
 
     },
     username: {
@@ -28,12 +24,12 @@ const thoughtSchema = mongoose.Schema({
     },
     toObject: {
         getters:true,
-    }
+    },
+    id: false
 })
 
-thoughtSchema.virtual('reactionCount', function() {
+thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length
-
 })
 
 module.exports = mongoose.model('Thought', thoughtSchema);

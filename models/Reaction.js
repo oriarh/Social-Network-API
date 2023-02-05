@@ -1,11 +1,8 @@
 const { ObjectId } = require('bson');
 const mongoose = require('mongoose');
 
-function updateTimeStamp () {
-    return this.createdAt = Date.now;
-}
 
-const reactionSchema = mongoose.Schema({
+const reactionSchema = new mongoose.Schema({
     reactionId : {
         type: mongoose.SchemaTypes.ObjectId,
         default: new ObjectId
@@ -20,9 +17,8 @@ const reactionSchema = mongoose.Schema({
         required: true,
     },
     createdAt: {
-        type: String,
-        get: updateTimeStamp
-
+        type: Date,
+        default: Date.now
     },
 })
 

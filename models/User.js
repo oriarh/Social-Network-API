@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const thought = require('./Thought')
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
@@ -26,11 +27,22 @@ const userSchema = mongoose.Schema({
 {
     toJSON: {
         virtuals: true,
-    }
+    },
+    toObject: {
+        virtuals: true,
+    },
+    id: false
 })
 
-userSchema.virtual('friendCount', function(name) {
-    return this.friens.length
+userSchema.virtual('friendCount').get (function () {
+    return this.friends.length
+})
+
+userSchema.pre('remove', function (next) {
+    console.log("Pre test. the thoughts are removed")
+    const thoughts = mongoose.model('Thought')
+    thoughts.remove({username: this.username})
+    next()
 })
 
 module.exports = mongoose.model('User', userSchema);
