@@ -7,7 +7,7 @@ This repo will contain code to build an API for a social network web application
 https://github.com/oriarh/Social-Network-API
 
 ## Walkthrough Video Link
-
+https://watch.screencastify.com/v/6jPeYMDBL3iw1MtP9lZf
 
 ## Installation
 Node.JS
